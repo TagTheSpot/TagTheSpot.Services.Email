@@ -4,6 +4,6 @@
     {
         Task SendEmailAsync<TModel>(
             SendEmailRequest<TModel> request,
-            string templateFile);
+            string templatePath);
     }
 }
