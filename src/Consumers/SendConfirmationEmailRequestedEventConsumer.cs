@@ -10,7 +10,8 @@ namespace TagTheSpot.Services.Email.Consumers
     {
         private readonly IEmailSender _emailSender;
 
-        public SendConfirmationEmailRequestedEventConsumer(IEmailSender emailSender)
+        public SendConfirmationEmailRequestedEventConsumer(
+            IEmailSender emailSender)
         {
             _emailSender = emailSender;
         }

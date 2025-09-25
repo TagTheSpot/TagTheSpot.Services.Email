@@ -34,6 +34,7 @@ namespace TagTheSpot.Services.Email
             builder.Services.AddMassTransit(cfg =>
             {
                 cfg.AddConsumer<SendConfirmationEmailRequestedEventConsumer>();
+                cfg.AddConsumer<SendResetPasswordEmailRequestedEventConsumer>();
 
                 cfg.UsingRabbitMq((context, config) =>
                 {
@@ -50,6 +51,9 @@ namespace TagTheSpot.Services.Email
                     {
                         e.Bind<SendConfirmationEmailRequestedEvent>();
                         e.ConfigureConsumer<SendConfirmationEmailRequestedEventConsumer>(context);
+
+                        e.Bind<SendResetPasswordEmailRequestedEvent>();
+                        e.ConfigureConsumer<SendResetPasswordEmailRequestedEventConsumer>(context);
                     });
                 });
             });
