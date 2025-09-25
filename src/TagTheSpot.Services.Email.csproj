@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -19,6 +19,6 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="TagTheSpot.Services.Shared.Infrastructure" Version="1.0.15" />
-    <PackageReference Include="TagTheSpot.Services.Shared.Messaging" Version="1.0.16" />
+    <PackageReference Include="TagTheSpot.Services.Shared.Messaging" Version="1.0.17" />
   </ItemGroup>
 </Project>
