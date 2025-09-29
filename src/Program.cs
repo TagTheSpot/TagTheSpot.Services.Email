@@ -37,6 +37,7 @@ namespace TagTheSpot.Services.Email
                 cfg.AddConsumer<SendConfirmationEmailRequestedEventConsumer>();
                 cfg.AddConsumer<SendResetPasswordEmailRequestedEventConsumer>();
                 cfg.AddConsumer<SendSubmissionApprovedEmailRequestedEventConsumer>();
+                cfg.AddConsumer<SendSubmissionRejectedEmailRequestedEventConsumer>();
 
                 cfg.UsingRabbitMq((context, config) =>
                 {
@@ -59,6 +60,9 @@ namespace TagTheSpot.Services.Email
 
                         e.Bind<SendSubmissionApprovedEmailRequestedEvent>();
                         e.ConfigureConsumer<SendSubmissionApprovedEmailRequestedEventConsumer>(context);
+
+                        e.Bind<SendSubmissionRejectedEmailRequestedEvent>();
+                        e.ConfigureConsumer<SendSubmissionRejectedEmailRequestedEventConsumer>(context);
                     });
                 });
             });
