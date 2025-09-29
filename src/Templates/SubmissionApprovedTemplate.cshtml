@@ -1,0 +1,72 @@
+﻿@using System
+@using TagTheSpot.Services.Shared.Messaging.Submissions
+@model SendSubmissionApprovedEmailRequestedEvent
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Заявку підтверджено</title>
+</head>
+<body style="margin:0; padding:0; font-family: 'Segoe UI', Roboto, Arial, sans-serif; background:linear-gradient(180deg,#0f172a,#1e293b); color:#f8fafc;">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center" style="padding:50px 20px;">
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600"
+                       style="background:#1e293b; border-radius:20px; box-shadow:0 12px 30px rgba(0,0,0,0.5); overflow:hidden;">
+
+                    <tr>
+                        <td align="center" style="padding-top:20px;">
+                            <div style="width:80px; height:5px; background:linear-gradient(135deg,#22c55e,#16a34a); border-radius:3px; margin-bottom:25px;"></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" style="padding:40px 35px;">
+                            <h2 style="color:#f8fafc; font-size:26px; margin:0 0 25px; font-weight:700;">
+                                🎉 Заявку підтверджено!
+                            </h2>
+                            <p style="font-size:18px; color:#cbd5e1; line-height:1.6; margin:0 0 20px;">
+                                Вітаємо! <br />
+                                Ваша заявка, подана
+                                <strong>@Model.SubmittedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</strong>,<br />
+                                була успішно <span style="color:#22c55e; font-weight:600;">підтверджена</span>
+                                <strong>@Model.ApprovedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</strong>.
+                            </p>
+
+                            <p style="font-size:16px; color:#cbd5e1; line-height:1.5; margin:0 0 35px;">
+                                Дякуємо за ваш вклад у спільноту TagTheSpot!
+                            </p>
+
+                            <a href="@Model.SubmissionLink"
+                               style="background:linear-gradient(135deg,#22c55e,#16a34a); color:#fff; text-decoration:none;
+                                      padding:20px 45px; border-radius:14px; font-size:20px; font-weight:700; display:inline-block;
+                                      transition: all 0.3s ease;">
+                                Переглянути заявку
+                            </a>
+                            <p style="font-size:14px; color:#9ca3af; margin-top:25px; line-height:1.5;">
+                                Якщо ви не очікували цього листа, просто проігноруйте його.
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" style="background:#111827; padding:25px;">
+                            <p style="font-size:13px; color:#6b7280; margin:0; line-height:1.5;">
+                                © @DateTime.UtcNow.Year TagTheSpot.<br />
+                                Знаходь, додавай і ділись спотами з іншими райдерами.
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
