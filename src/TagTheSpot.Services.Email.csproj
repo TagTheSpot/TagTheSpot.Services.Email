@@ -19,6 +19,6 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="TagTheSpot.Services.Shared.Infrastructure" Version="1.0.15" />
-    <PackageReference Include="TagTheSpot.Services.Shared.Messaging" Version="1.0.17" />
+    <PackageReference Include="TagTheSpot.Services.Shared.Messaging" Version="1.0.18" />
   </ItemGroup>
 </Project>

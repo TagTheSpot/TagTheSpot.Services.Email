@@ -7,6 +7,7 @@ using TagTheSpot.Services.Email.Emails;
 using TagTheSpot.Services.Email.Options;
 using TagTheSpot.Services.Shared.Infrastructure.Options;
 using TagTheSpot.Services.Shared.Messaging.Auth;
+using TagTheSpot.Services.Shared.Messaging.Submissions;
 
 namespace TagTheSpot.Services.Email
 {
@@ -35,6 +36,7 @@ namespace TagTheSpot.Services.Email
             {
                 cfg.AddConsumer<SendConfirmationEmailRequestedEventConsumer>();
                 cfg.AddConsumer<SendResetPasswordEmailRequestedEventConsumer>();
+                cfg.AddConsumer<SendSubmissionApprovedEmailRequestedEventConsumer>();
 
                 cfg.UsingRabbitMq((context, config) =>
                 {
@@ -54,6 +56,9 @@ namespace TagTheSpot.Services.Email
 
                         e.Bind<SendResetPasswordEmailRequestedEvent>();
                         e.ConfigureConsumer<SendResetPasswordEmailRequestedEventConsumer>(context);
+
+                        e.Bind<SendSubmissionApprovedEmailRequestedEvent>();
+                        e.ConfigureConsumer<SendSubmissionApprovedEmailRequestedEventConsumer>(context);
                     });
                 });
             });
