@@ -1,7 +1,7 @@
+using FluentEmail.MailKitSmtp;
+using MailKit.Security;
 using MassTransit;
 using Microsoft.Extensions.Options;
-using System.Net;
-using System.Net.Mail;
 using TagTheSpot.Services.Email.Consumers;
 using TagTheSpot.Services.Email.Emails;
 using TagTheSpot.Services.Email.Options;
@@ -52,6 +52,15 @@ namespace TagTheSpot.Services.Email
 
                     config.ReceiveEndpoint(messagingSettings.QueueName, e =>
                     {
+                        e.UseMessageRetry(cfg =>
+                        {
+                            cfg.Exponential(
+                                retryLimit: 5,
+                                minInterval: TimeSpan.FromSeconds(2),
+                                maxInterval: TimeSpan.FromMinutes(2),
+                                intervalDelta: TimeSpan.FromSeconds(15));
+                        });
+
                         e.Bind<SendConfirmationEmailRequestedEvent>();
                         e.ConfigureConsumer<SendConfirmationEmailRequestedEventConsumer>(context);
 
@@ -72,16 +81,18 @@ namespace TagTheSpot.Services.Email
             builder.Services
                 .AddFluentEmail(smtpSettings!.From)
                 .AddRazorRenderer()
-                .AddSmtpSender(new SmtpClient(smtpSettings.Host)
+                .AddMailKitSender(new SmtpClientOptions
                 {
+                    Server = smtpSettings.Host,
                     Port = smtpSettings.Port,
-                    Credentials = new NetworkCredential(
-                        userName: smtpSettings.Username,
-                        password: smtpSettings.Password),
-                    EnableSsl = smtpSettings.EnableSsl
+                    User = smtpSettings.Username,
+                    Password = smtpSettings.Password,
+                    SocketOptions = smtpSettings.EnableSsl ? SecureSocketOptions.StartTls : SecureSocketOptions.Auto,
+                    RequiresAuthentication = true,
+                    UseSsl = smtpSettings.EnableSsl,
                 });
 
-            builder.Services.AddSingleton<IEmailSender, EmailSender>();
+            builder.Services.AddScoped<IEmailSender, EmailSender>();
 
             var host = builder.Build();
 
