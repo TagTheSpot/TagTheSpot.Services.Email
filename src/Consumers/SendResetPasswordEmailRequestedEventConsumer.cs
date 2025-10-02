@@ -25,9 +25,11 @@ namespace TagTheSpot.Services.Email.Consumers
                 Subject: "🔒 Відновлення пароля на TagTheSpot",
                 new ResetPasswordModel(message.ResetPasswordLink));
 
+            var templatePath = Path.Combine(AppContext.BaseDirectory, "Templates", "ResetPasswordTemplate.cshtml");
+
             await _emailSender.SendEmailAsync(
                 request,
-                templatePath: "Templates/ResetPasswordTemplate.cshtml");
+                templatePath: templatePath);
         }
     }
 }

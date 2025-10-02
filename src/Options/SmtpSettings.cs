@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TagTheSpot.Services.Shared.Abstractions.Options;
 
 namespace TagTheSpot.Services.Email.Options
 {
-    public sealed class SmtpSettings
+    public sealed class SmtpSettings : IAppOptions
     {
-        public const string SectionName = nameof(SmtpSettings);
+        public static string SectionName => nameof(SmtpSettings);
 
         [Required]
         public required string Username { get; init; }

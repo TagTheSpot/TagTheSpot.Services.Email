@@ -25,9 +25,11 @@ namespace TagTheSpot.Services.Email.Consumers
                 Subject: "🔑 Завершіть реєстрацію на TagTheSpot!",
                 new ConfirmEmailModel(message.ConfirmationLink));
 
+            var templatePath = Path.Combine(AppContext.BaseDirectory, "Templates", "ConfirmEmailTemplate.cshtml");
+
             await _emailSender.SendEmailAsync(
                 request,
-                templatePath: "Templates/ConfirmEmailTemplate.cshtml");
+                templatePath: templatePath);
         }
     }
 }

@@ -24,9 +24,11 @@ namespace TagTheSpot.Services.Email.Consumers
                 Subject: "🚀 Вашу заявку успішно підтверджено",
                 message);
 
+            var templatePath = Path.Combine(AppContext.BaseDirectory, "Templates", "SubmissionApprovedTemplate.cshtml");
+
             await _emailSender.SendEmailAsync(
                 request,
-                templatePath: "Templates/SubmissionApprovedTemplate.cshtml");
+                templatePath: templatePath);
         }
     }
 }
