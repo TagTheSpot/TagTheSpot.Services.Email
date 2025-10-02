@@ -24,9 +24,11 @@ namespace TagTheSpot.Services.Email.Consumers
                 Subject: "❌ Вашу заявку відхилено на TagTheSpot",
                 message);
 
+            var templatePath = Path.Combine(AppContext.BaseDirectory, "Templates", "SubmissionRejectedTemplate.cshtml");
+
             await _emailSender.SendEmailAsync(
                 request,
-                templatePath: "Templates/SubmissionRejectedTemplate.cshtml");
+                templatePath: templatePath);
         }
     }
 }
